@@ -1,15 +1,17 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import IndexLayout from './layout/IndexLayout';
-import PersonalDataView from './pages/personal/PersonalDataView';
-import PersonalPlan from './pages/personal/PersonalPlan';
-import PersonalKnowledge from './pages/personal/PersonalKnowledge';
-import CreateBlog from './pages/blog/CreateBlog';
-import ManageBlog from './pages/blog/ManageBlog';
-import BlogList from './pages/blog/BlogList';
+import Home from '../pages/Home';
+import Login from '../pages/login/login';
+import IndexLayout from '../layout/IndexLayout';
+import PersonalDataView from '../pages/personal/PersonalDataView';
+import PersonalPlan from '../pages/personal/PersonalPlan';
+import PersonalKnowledge from '../pages/personal/PersonalKnowledge';
+import CreateBlog from '../pages/blog/CreateBlog';
+import ManageBlog from '../pages/blog/ManageBlog';
+import BlogList from '../pages/blog/BlogList';
+import BlogDetail from '../pages/blog/BlogDetail';
 
-const renderComponentWithLayout = (Layout: React.FC, Component: React.FC) => (
+const renderComponentWithLayout = (Layout: React.FC, Component: any) => (
   <Layout>
     <Component />
   </Layout>
@@ -21,6 +23,11 @@ const routes = [
     exact: true,
     // component: Home,
     component: () => renderComponentWithLayout(IndexLayout, Home),
+  },
+  {
+    path: '/login',
+    exact: true,
+    component: Login,
   },
   {
     path: '/blog/create',
@@ -36,6 +43,11 @@ const routes = [
     path: '/blog/list',
     exact: true,
     component: () => renderComponentWithLayout(IndexLayout, BlogList),
+  },
+  {
+    path: '/blog/detail',
+    exact: true,
+    component: BlogDetail,
   },
   {
     path: '/personal/data',

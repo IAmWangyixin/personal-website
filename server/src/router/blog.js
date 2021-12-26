@@ -11,6 +11,7 @@ const { successModel, errorModel } = require('../model/resModel');
 
 // 统一的登录验证函数
 const loginCheck = (req) => {
+  console.log('req', req.session);
   if (!req.session.username) {
     return Promise.resolve(errorModel('未登录'));
   }

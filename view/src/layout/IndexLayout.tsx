@@ -1,18 +1,17 @@
 import React from 'react';
 import { Layout } from 'antd';
 import Nav from './Nav';
+import IndexLayoutHeader from './IndexLayoutHeader';
 import './layout.scss';
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 const IndexLayout: React.FC = ({ children }) => {
-  // const { children } = props;
+  // const { children, history } = props;
+
   return (
     <Layout className="index-layout">
-      <Header className="header">
-        <div className="header-logo" />
-        <p className="header-title">展示屋</p>
-      </Header>
+      <IndexLayoutHeader />
       <Layout>
         <Nav />
         <Layout style={{ padding: '0 24px 24px' }}>

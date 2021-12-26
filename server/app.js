@@ -96,7 +96,7 @@ const serverHandle = (req, res) => {
         if (needSetCookie) {
           res.setHeader(
             'Set-Cookie',
-            `userid=${userId}; path=/; httpOnly; expires=${getCookieExpires()}`
+            `userid=${userId}; path=/; expires=${getCookieExpires()}`
           );
         }
         res.end(JSON.stringify(blogData));
@@ -111,7 +111,7 @@ const serverHandle = (req, res) => {
         if (needSetCookie) {
           res.setHeader(
             'Set-Cookie',
-            `userid=${userId}; path=/; httpOnly; expires=${getCookieExpires()}`
+            `userid=${userId}; path=/; expires=${getCookieExpires()}`
           );
         }
         res.end(JSON.stringify(userData));

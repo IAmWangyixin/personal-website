@@ -17,6 +17,9 @@ module.exports = {
   devServer: {
     open: true,
     static: './nina',
+    proxy: {
+      '/api': 'http://localhost:8000',
+    },
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.png', '.scss'],
