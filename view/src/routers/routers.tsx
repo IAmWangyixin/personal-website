@@ -10,11 +10,14 @@ import CreateBlog from '../pages/blog/CreateBlog';
 import ManageBlog from '../pages/blog/ManageBlog';
 import BlogList from '../pages/blog/BlogList';
 import BlogDetail from '../pages/blog/BlogDetail';
+import { UserContextProvider } from '../context/userContext';
 
-const renderComponentWithLayout = (Layout: React.FC, Component: any) => (
-  <Layout>
-    <Component />
-  </Layout>
+const renderComponentWithLayout = (Layout: React.FC, Component: React.FC) => (
+  <UserContextProvider>
+    <Layout>
+      <Component />
+    </Layout>
+  </UserContextProvider>
 );
 
 const routes = [
@@ -22,7 +25,7 @@ const routes = [
     path: '/',
     exact: true,
     // component: Home,
-    component: () => renderComponentWithLayout(IndexLayout, Home),
+    component: () => renderComponentWithLayout(IndexLayout, BlogList),
   },
   {
     path: '/login',

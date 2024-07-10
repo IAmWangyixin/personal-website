@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Layout, Menu } from 'antd';
 import { FormOutlined, NotificationOutlined } from '@ant-design/icons';
-import { withRouter } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -13,19 +13,14 @@ const menus = [
     title: '个人博客',
     subMenus: [
       {
-        key: 'home',
-        content: 'Home',
-        path: '/',
+        key: 'blogList',
+        content: '博客列表',
+        path: '/blog/list',
       },
       {
         key: 'blogCreate',
         content: '创建博客',
         path: '/blog/create',
-      },
-      {
-        key: 'blogList',
-        content: '博客列表',
-        path: '/blog/list',
       },
       {
         key: 'blogManage',
@@ -56,10 +51,23 @@ const menus = [
       },
     ],
   },
+  {
+    key: 'reactDemo',
+    icon: <NotificationOutlined />,
+    title: 'react例子',
+    subMenus: [
+      {
+        key: 'componentUpdate',
+        content: '组件更新机制',
+        path: '/reactDemo/componentUpdate',
+      },
+    ],
+  },
 ];
 
 const Nav: React.FC = (props: any) => {
-  const { location, history } = props;
+  const location = useLocation();
+  const history = useHistory();
   const selectMenuInfo = (() => {
     const { pathname } = location;
     const selectOpenMenu = menus.filter((menu, index) => {
@@ -69,9 +77,12 @@ const Nav: React.FC = (props: any) => {
       return pathname.indexOf(menu.key) > 0;
     })[0];
 
-    const selectSubMenu = selectOpenMenu.subMenus.filter(
-      (subMenu) => pathname === subMenu.path
-    );
+    const selectSubMenu = selectOpenMenu.subMenus.filter((subMenu) => {
+      if (pathname === '/') {
+        return subMenu.path === '/blog/list';
+      }
+      return pathname === subMenu.path;
+    });
     return {
       ...selectOpenMenu,
       subMenus: [...selectSubMenu],
@@ -106,4 +117,4 @@ const Nav: React.FC = (props: any) => {
   );
 };
 
-export default withRouter(Nav);
+export default Nav;

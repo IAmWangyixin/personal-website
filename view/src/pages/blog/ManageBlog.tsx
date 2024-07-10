@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Table, Tag, Space } from 'antd';
 import moment from 'moment';
 import { blogList } from '../../core/api';
-import { withRouter } from 'react-router';
+import { useHistory } from 'react-router';
 const columns = ({ gotoBlogDetail }) => [
   {
     title: '标题',
@@ -38,7 +38,7 @@ const ManageBlog: React.FC = (props: any) => {
     fetchBlogList();
   }, []);
 
-  const { history } = props;
+  const history = useHistory();
   const gotoBlogDetail = (id: string | number) => {
     console.log(id);
 
@@ -50,8 +50,9 @@ const ManageBlog: React.FC = (props: any) => {
         gotoBlogDetail,
       })}
       dataSource={blogLists}
+      rowKey={(record) => record.id}
     />
   );
 };
 
-export default withRouter(ManageBlog);
+export default ManageBlog;

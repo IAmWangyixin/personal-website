@@ -1,8 +1,6 @@
 // 系统基本设置聚集：返回类型、path\query\未命中404
-const { log } = require('console');
 const queryString = require('querystring');
-// 业务代码
-
+const { access } = require('./src/utils/log');
 const handleBlogRouter = require('./src/router/blog');
 const handleUserRouter = require('./src/router/user');
 
@@ -45,6 +43,13 @@ const getPostData = (req) => {
 };
 
 const serverHandle = (req, res) => {
+  // 记录 access log
+  access(
+    `${req.method} -- ${req.url} -- ${
+      req.headers['user-agent']
+    } -- ${Date.now()}`
+  );
+
   // 设置返回格式 JSON
   res.setHeader('Content-type', 'application/json');
 

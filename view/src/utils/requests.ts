@@ -11,7 +11,7 @@ interface Requests {
 }
 
 const axiosInstance = axios.create({
-  timeout: 0,
+  timeout: 60000,
   headers: {
     'Content-Type': 'application/json',
   },

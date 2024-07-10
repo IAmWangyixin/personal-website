@@ -1,24 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { requests } from '../../utils';
-import { withRouter } from 'react-router';
+import { useHistory } from 'react-router';
+import { UserContext } from '../../context/userContext';
 
 const Login: React.FC = (props: any) => {
-  const { history } = props;
+  const history = useHistory();
+  const userInfo = useContext(UserContext);
   const onFinish = async (values: any) => {
-    console.log('values', values);
-
     const res = await requests.post('/api/user/login', values);
     if (res.errno === 0) {
+      sessionStorage.setItem('userId', res.data.id);
+      userInfo.id = res.data.id;
       history.push('/');
     } else {
       message.error('登录失败');
     }
-    console.log('res', res);
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
   };
 
   return (
@@ -29,7 +26,6 @@ const Login: React.FC = (props: any) => {
         wrapperCol={{ span: 16 }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <Form.Item
@@ -48,14 +44,6 @@ const Login: React.FC = (props: any) => {
           <Input.Password />
         </Form.Item>
 
-        {/* <Form.Item
-          name="remember"
-          valuePropName="checked"
-          wrapperCol={{ offset: 8, span: 16 }}
-        >
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item> */}
-
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
             登录
@@ -66,4 +54,4 @@ const Login: React.FC = (props: any) => {
   );
 };
 
-export default withRouter(Login);
+export default Login;
