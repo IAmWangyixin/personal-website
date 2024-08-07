@@ -49,6 +49,11 @@ const menus = [
         content: '知识图谱',
         path: '/personal/knowledge',
       },
+      {
+        key: 'personalTools',
+        content: '工具箱',
+        path: '/personal/tools',
+      },
     ],
   },
   {
