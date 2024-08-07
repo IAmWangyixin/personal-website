@@ -2,9 +2,9 @@
   "name": "react-theme",
   "version": "0.0.0",
   "scripts": {
-    "dev": "webpack-dev-server",
-    "build": "webpack build",
-    "serve": "webpack preview"
+    "dev": "SET NODE_OPTIONS=--openssl-legacy-provider && webpack-dev-server",
+    "build": "SET NODE_OPTIONS=--openssl-legacy-provider && webpack build",
+    "serve": "SET NODE_OPTIONS=--openssl-legacy-provider && webpack preview"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
